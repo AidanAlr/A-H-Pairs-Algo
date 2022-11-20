@@ -10,18 +10,21 @@ import yfinance as yf
 
 pd.set_option('display.max_columns', None)
 
+# 'main' function - used to run subsequent functions in sequence
 def main():
     stocks = stock_list()
     stock_df = extracted_data(stocks)
     highest_corr_pair(stock_df)
 
 
+# 'stock_list' function – requests ticker input from user, returns list with upper case, split tickers
 def stock_list():
-    user_input = input('Enter your tickers separated by a "space" please.')
+    user_input = input('Enter your tickers separated by a "space" please > ')
     stocks = list(user_input.upper().split())
     return stocks
 
-
+# extracted_data function - adding tickers to a string, truncating the new string, 
+# downloading and printing 5y historic closing data for the tickers
 def extracted_data(stocks):
     ticker_string = ''
     for tickers in stocks:
