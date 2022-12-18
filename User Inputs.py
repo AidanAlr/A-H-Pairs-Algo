@@ -1,11 +1,6 @@
-import numpy
+
 import numpy as np
 import pandas as pd
-import math
-import time
-import datetime
-import os
-import glob
 import yfinance as yf
 
 pd.set_option('display.max_columns', None)
@@ -38,15 +33,20 @@ def extracted_data(stocks):
 def highest_corr_pair(stock_df):
     print('Correlation Matrix generated from your stock picks: ')
     corr_matrix = stock_df.corr()
+    np.fill_diagonal(corr_matrix.values, np.nan)
     print(corr_matrix)
     print('''
     Correlation Pairs:''')
     corr_pairs = corr_matrix.unstack().drop_duplicates().sort_values(kind='quicksort')
-    np.fill_diagonal(corr_matrix.values, np.nan)
     print(corr_pairs)
-    # np.fill_diagonal(corr_matrix.values, np.nan)
-    # print(corr_matrix)
-    # print('\n')
 
+    # Find the index of the maximum value in the corr_pairs array
+    max_corr_index = corr_pairs.idxmax()
+
+    # Extract the ticker symbols of the two stocks from the max_corr_index
+    ticker_1, ticker_2 = max_corr_index
+
+    # Print the ticker symbols
+    print(f'The assets with the highest correlation are {ticker_1} and {ticker_2}')
 
 main()
