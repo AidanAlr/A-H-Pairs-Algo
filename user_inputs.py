@@ -18,9 +18,10 @@ def stock_list():
     stocks = list(user_input.upper().split())
     return stocks
 
-# extracted_data function - adding tickers to a string, truncating the new string, 
-# downloading and printing 5y historic closing data for the tickers
+
 def extracted_data(stocks):
+    # extracted_data function - adding tickers to a string, truncating the new string,
+    # downloading and printing 5y historic closing data for the tickers
     ticker_string = ''
     for tickers in stocks:
         ticker_string += tickers + ' '
@@ -50,6 +51,7 @@ def highest_corr_pair(stock_df):
     ticker_1, ticker_2 = max_corr_index
 
     # Print the ticker symbols
+    print('\n')
     print(f'The assets with the highest correlation are {ticker_1} and {ticker_2}')
 
 main()
